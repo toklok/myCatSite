@@ -44,5 +44,5 @@ gulp.task('js', function() {
 
 gulp.task('watch', function () {
     livereload.listen();
-    gulp.watch(paths.cssSource + '**/*.css', ['styles']);
+    gulp.watch(paths.cssSource,  ['css']);
 });
