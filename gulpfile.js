@@ -6,6 +6,7 @@ var autoprefixer = require('autoprefixer');
 var livereload = require('gulp-livereload');
 var postnesting = require('postcss-nesting');
 var cssnext = require('gulp-cssnext');
+var babel = require('gulp-babel');
 
 gulp.task('css', function () {
     var processors = [
@@ -13,12 +14,20 @@ gulp.task('css', function () {
         postnesting({ /* options */})
     ];
 
-    return gulp.src('./*.css')
+    return gulp.src('./src/css/*.css')
         .pipe(postcss(processors))
         .pipe(cssnext({ /* options */}))
-        .pipe(gulp.dest('./css'))
+        .pipe(gulp.dest('./dist/css'))
         .pipe(livereload());
 
+});
+
+gulp.task('js', function() {
+    return gulp.src('src/js/app.js')
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(gulp.dest('dist/js'))
 });
 
 
