@@ -4,11 +4,12 @@ var postcss = require('gulp-postcss'),
     gulp = require('gulp'),
     autoprefixer = require('autoprefixer'),
     livereload = require('gulp-livereload'),
-    postnesting = require('postcss-nesting'),
+    nesting = require('postcss-nesting'),
     cssnext = require('gulp-cssnext'),
     babel = require('gulp-babel'),
     lost = require('lost'),
-    util = require('gulp-util');
+    util = require('gulp-util'),
+    minmax = require('postcss-media-minmax')
 
 var paths = {
     cssSource: './src/css/*.css',
@@ -22,7 +23,8 @@ gulp.task('css', function () {
     var processors = [
         lost(),
         autoprefixer({browsers: ['last 1 version']}),
-        postnesting({ /* options */})
+        nesting({ /* options */}),
+        minmax()
     ];
 
     return gulp.src(paths.cssSource)
@@ -44,5 +46,6 @@ gulp.task('js', function() {
 
 gulp.task('watch', function () {
     livereload.listen();
-    gulp.watch(paths.cssSource,  ['css']);
+    gulp.watch(paths.cssSource, ['css']);
+    gulp.watch(paths.jsSource, ['js']);
 });
