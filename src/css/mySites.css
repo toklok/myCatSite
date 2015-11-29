@@ -2,8 +2,16 @@
 
 :root {
     --mainColor: #12345678;
+    --black: #333
 }
 
 body {
     color: var(--mainColor);
+    background-color: var(--black);
+}
+
+/* testing */
+
+div {
+    lost-column: 1/3;
 }
